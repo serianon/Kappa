@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -28,21 +30,22 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String CURRENT_ITEM_INDEX_KEY = "CURRENT_ITEM_INDEX_KEY";
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private CardPagerAdapter mCardPagerAdapter;
 
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mCardPagerAdapter = new CardPagerAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.viewpager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(mCardPagerAdapter);
 
         enableViewPagerPreviews();
 
@@ -73,22 +76,46 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.qq:
-                startActivity(new Intent(this, OverviewActivity.class));
+                Intent intent = new Intent(this, OverviewActivity.class);
+                /*CardView currentCardView = mCardPagerAdapter.getItem(mViewPager.getCurrentItem())
+                        .getView().findViewById(R.id.cardview);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this, currentCardView, ViewCompat.getTransitionName(currentCardView));
+                startActivity(intent, options.toBundle());*/
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public static class PlaceholderFragment extends Fragment {
+    public class CardPagerAdapter extends FragmentPagerAdapter {
+
+        public CardPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            String[] cardValues = getResources().getStringArray(R.array.fibonacci);
+            return CardFragment.newInstance(cardValues[position]);
+        }
+
+        @Override
+        public int getCount() {
+            return getResources().getIntArray(R.array.fibonacci).length;
+        }
+    }
+
+    public static class CardFragment extends Fragment {
 
         private static final String CARD_VALUE_KEY = "CARD_VALUE";
 
-        public PlaceholderFragment() {
+        public CardFragment() {
         }
 
-        public static PlaceholderFragment newInstance(String cardValue) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static CardFragment newInstance(String cardValue) {
+            CardFragment fragment = new CardFragment();
             Bundle args = new Bundle();
             args.putString(CARD_VALUE_KEY, cardValue);
             fragment.setArguments(args);
@@ -102,23 +129,13 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(getArguments().getString(CARD_VALUE_KEY));
             return rootView;
         }
-    }
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
 
         @Override
-        public Fragment getItem(int position) {
-            String[] cardValues = getResources().getStringArray(R.array.fibonacci);
-            return PlaceholderFragment.newInstance(cardValues[position]);
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            ActivityCompat.startPostponedEnterTransition(getActivity());
         }
 
-        @Override
-        public int getCount() {
-            return getResources().getIntArray(R.array.fibonacci).length;
-        }
     }
+
 }

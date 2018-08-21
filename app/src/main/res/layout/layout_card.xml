@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_bg"
-    tools:context="com.github.serianon.ppp.MainActivity$PlaceholderFragment">
+    android:background="@color/dark_bg">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="6dp"
+        android:transitionName="@string/card_transition_id"
         app:cardBackgroundColor="#fff"
         app:cardCornerRadius="12dp"
         app:cardElevation="1dp"
@@ -31,9 +31,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="#333"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="250sp"
             android:textSize="250sp"
+            app:autoSizeMaxTextSize="250sp"
+            app:autoSizeTextType="uniform"
             tools:text="13" />
 
     </android.support.v7.widget.CardView>

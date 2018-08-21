@@ -1,9 +1,13 @@
 package com.github.serianon.ppp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +34,11 @@ public class OverviewActivity extends AppCompatActivity {
         gridView.setAdapter(cardsAdapter);
 
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            startActivity(MainActivity.createIntent(OverviewActivity.this, position));
+            Intent intent = MainActivity.createIntent(OverviewActivity.this, position);
+            CardView currentCardView = view.findViewById(R.id.cardview);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this, currentCardView, ViewCompat.getTransitionName(currentCardView));
+            startActivity(intent, options.toBundle());
         });
     }
 
