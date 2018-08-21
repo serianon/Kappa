@@ -11,7 +11,7 @@ Well, someday hopefully. Right now, it's a playground app for trying out some ne
 - smooth transitions between card-view and overview
 - fix auto-font-size in overview
 - card with ripple-effect
-...
+- ...
 - more numbers + selection via settings
 - android architecture components?
 - try out some interesting architectures, like single-activity
