@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.qq:
+            case R.id.to_cards_overview:
                 Intent intent = new Intent(this, OverviewActivity.class);
                 /*CardView currentCardView = mCardPagerAdapter.getItem(mViewPager.getCurrentItem())
                         .getView().findViewById(R.id.cardview);

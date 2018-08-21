@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PPP</string>
 
+    <string name="cards_overview">Overview</string>
     <string name="card_transition_id">card_transition</string>
 </resources>
