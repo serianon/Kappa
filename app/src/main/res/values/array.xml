@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fibonacci">
+        <item>"?"</item>
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"5"</item>
+        <item>"8"</item>
+        <item>"13"</item>
+        <item>"\u221E"</item>
+    </string-array>
+</resources>
