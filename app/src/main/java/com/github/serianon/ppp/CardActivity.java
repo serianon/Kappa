@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,14 +78,14 @@ public class CardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.to_cards_overview:
+            case R.id.to_overview:
                 Intent intent = new Intent(this, OverviewActivity.class);
-                /*CardView currentCardView = mCardPagerAdapter.getItem(mViewPager.getCurrentItem())
-                        .getView().findViewById(R.id.cardview);
+                CardFragment currentCardFragment = (CardFragment) mCardPagerAdapter
+                        .instantiateItem(mViewPager, mViewPager.getCurrentItem());
+                CardView currentCardView = currentCardFragment.getView().findViewById(R.id.cardview);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this, currentCardView, ViewCompat.getTransitionName(currentCardView));
-                startActivity(intent, options.toBundle());*/
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

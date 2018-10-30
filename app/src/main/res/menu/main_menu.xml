@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/to_cards_overview"
+        android:id="@+id/to_overview"
         android:icon="@drawable/ic_baseline_apps_24px"
         android:title="@string/cards_overview"
         app:showAsAction="always" />
