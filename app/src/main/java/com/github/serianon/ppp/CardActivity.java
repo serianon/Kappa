@@ -10,7 +10,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -84,7 +83,7 @@ public class CardActivity extends AppCompatActivity {
                         .instantiateItem(mViewPager, mViewPager.getCurrentItem());
                 CardView currentCardView = currentCardFragment.getView().findViewById(R.id.cardview);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this, currentCardView, ViewCompat.getTransitionName(currentCardView));
+                        this, currentCardView, getString(R.string.overview_transition_id));
                 startActivity(intent, options.toBundle());
                 return true;
             default:

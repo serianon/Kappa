@@ -2,5 +2,7 @@
     <string name="app_name">PPP</string>
 
     <string name="cards_overview">Overview</string>
+
     <string name="card_transition_id">card_transition</string>
+    <string name="overview_transition_id">overview_transition</string>
 </resources>
