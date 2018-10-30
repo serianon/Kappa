@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_bg"
     android:orientation="vertical"
-    tools:context="com.github.serianon.ppp.MainActivity">
+    tools:context="com.github.serianon.ppp.CardActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

@@ -34,7 +34,7 @@ public class OverviewActivity extends AppCompatActivity {
         gridView.setAdapter(cardsAdapter);
 
         gridView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = MainActivity.createIntent(OverviewActivity.this, position);
+            Intent intent = CardActivity.createIntent(OverviewActivity.this, position);
             CardView currentCardView = view.findViewById(R.id.cardview);
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this, currentCardView, ViewCompat.getTransitionName(currentCardView));

@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name="com.github.serianon.ppp.MainActivity"
+            android:name="com.github.serianon.ppp.CardActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>

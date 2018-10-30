@@ -20,10 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class CardActivity extends AppCompatActivity {
 
     public static Intent createIntent(Context context, int cardIndex) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, CardActivity.class);
         intent.putExtra(CURRENT_ITEM_INDEX_KEY, cardIndex);
         return intent;
     }
