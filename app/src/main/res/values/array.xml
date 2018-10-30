@@ -2,13 +2,13 @@
 <resources>
     <string-array name="fibonacci">
         <item>"?"</item>
-        <item>"0"</item>
+        <item>"\u00BD"</item>
         <item>"1"</item>
         <item>"2"</item>
         <item>"3"</item>
         <item>"5"</item>
         <item>"8"</item>
         <item>"13"</item>
-        <item>"\u221E"</item>
+        <item>"20"</item>
     </string-array>
 </resources>
