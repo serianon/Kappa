@@ -2,17 +2,32 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def buildVersionCode() {
+    String code = "git rev-list HEAD --count".execute().text.trim()
+    return Integer.parseInt(code)
+}
+
+def buildVersionName() {
+    String name = project.version
+    String code = buildVersionCode()
+    return name + "-" + code
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.github.serianon.ppp"
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode buildVersionCode()
+        versionName buildVersionName()
     }
     buildTypes {
+        debug {
+            versionNameSuffix = "-debug"
+        }
         release {
+            versionNameSuffix = "-release"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
