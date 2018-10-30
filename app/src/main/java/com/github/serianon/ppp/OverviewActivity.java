@@ -3,7 +3,6 @@ package com.github.serianon.ppp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -32,25 +31,17 @@ public class OverviewActivity extends AppCompatActivity {
         String[] cardValues = getResources().getStringArray(R.array.fibonacci);
         CardsAdapter cardsAdapter = new CardsAdapter(this, cardValues);
         gridView.setAdapter(cardsAdapter);
-
-        gridView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = CardActivity.createIntent(OverviewActivity.this, position);
-            CardView currentCardView = view.findViewById(R.id.cardview);
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this, currentCardView, ViewCompat.getTransitionName(currentCardView));
-            startActivity(intent, options.toBundle());
-        });
     }
 
     public class CardsAdapter extends BaseAdapter {
 
         private final String[] mCardValues;
 
-        private LayoutInflater mLayoutInflator;
+        private LayoutInflater mLayoutInflater;
 
         public CardsAdapter(Context context, String[] cardValues) {
             mCardValues = cardValues;
-            mLayoutInflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         public int getCount() {
@@ -66,19 +57,26 @@ public class OverviewActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            ConstraintLayout cardLayout;
+            View view;
 
             if (convertView == null) {
-                // if it's not recycled, initialize some attributes
-                cardLayout = (ConstraintLayout) mLayoutInflator.inflate(R.layout.layout_card, null);
+                view = mLayoutInflater.inflate(R.layout.layout_card, null);
             } else {
-                cardLayout = (ConstraintLayout) convertView;
+                view = convertView;
             }
 
-            TextView textView = cardLayout.findViewById(R.id.number);
+            TextView textView = view.findViewById(R.id.number);
             textView.setText(mCardValues[position]);
 
-            return cardLayout;
+            CardView cardView = view.findViewById(R.id.cardview);
+            cardView.setOnClickListener(v -> {
+                Intent intent = CardActivity.createIntent(OverviewActivity.this, position);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        OverviewActivity.this, cardView, ViewCompat.getTransitionName(cardView));
+                startActivity(intent, options.toBundle());
+            });
+
+            return view;
         }
     }
 
