@@ -10,6 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="6dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:transitionName="@string/card_transition_id"
         app:cardBackgroundColor="#fff"
         app:cardCornerRadius="12dp"
