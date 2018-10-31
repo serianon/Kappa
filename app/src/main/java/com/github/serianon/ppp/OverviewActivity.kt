@@ -1,5 +1,6 @@
 package com.github.serianon.ppp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -48,6 +49,7 @@ class OverviewActivity : AppCompatActivity() {
             return -1
         }
 
+        @SuppressLint("InflateParams")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val view: View = convertView ?: mLayoutInflater.inflate(R.layout.layout_card, null)
 
