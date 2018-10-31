@@ -7,6 +7,7 @@ Well, someday hopefully. Right now, it's a playground app for trying out some ne
 # TODO:
 - port to Kotlin
 - more numbers + selection via settings
+- support at least a second theme/color-scheme
 - android architecture components?
 - try out some interesting architectures, like single-activity
 - MaterialDesign2 when available
