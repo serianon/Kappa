@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def buildVersionCode() {
+def static buildVersionCode() {
     String code = "git rev-list HEAD --count".execute().text.trim()
     return Integer.parseInt(code)
 }

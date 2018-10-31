@@ -65,8 +65,8 @@ class CardActivity : AppCompatActivity() {
                 startActivity(intent, options.toBundle())
                 return true
             }
-            else -> return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
     }
 
     inner class CardPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -97,7 +97,7 @@ class CardActivity : AppCompatActivity() {
 
         companion object {
 
-            private val CARD_VALUE_KEY = "CARD_VALUE"
+            private const val CARD_VALUE_KEY = "CARD_VALUE"
 
             fun newInstance(cardValue: String): CardFragment {
                 val fragment = CardFragment()
@@ -118,7 +118,7 @@ class CardActivity : AppCompatActivity() {
             return intent
         }
 
-        private val CURRENT_ITEM_INDEX_KEY = "CURRENT_ITEM_INDEX_KEY"
+        private const val CURRENT_ITEM_INDEX_KEY = "CURRENT_ITEM_INDEX_KEY"
     }
 
 }

@@ -33,11 +33,8 @@ class OverviewActivity : AppCompatActivity() {
 
     inner class CardsAdapter(context: Context, private val mCardValues: Array<String>) : BaseAdapter() {
 
-        private val mLayoutInflater: LayoutInflater
-
-        init {
-            mLayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        }
+        private val mLayoutInflater: LayoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         override fun getCount(): Int {
             return mCardValues.size
@@ -52,13 +49,7 @@ class OverviewActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view: View
-
-            if (convertView == null) {
-                view = mLayoutInflater.inflate(R.layout.layout_card, null)
-            } else {
-                view = convertView
-            }
+            val view: View = convertView ?: mLayoutInflater.inflate(R.layout.layout_card, null)
 
             val textView = view.findViewById<TextView>(R.id.number)
             textView.text = mCardValues[position]
