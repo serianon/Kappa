@@ -57,7 +57,7 @@ class OverviewActivity : AppCompatActivity() {
             textView.text = mCardValues[position]
 
             val cardView = view.findViewById<CardView>(R.id.cardview)
-            cardView.setOnClickListener { v ->
+            cardView.setOnClickListener {
                 val intent = CardActivity.createIntent(this@OverviewActivity, position)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this@OverviewActivity, cardView, ViewCompat.getTransitionName(cardView)!!)
