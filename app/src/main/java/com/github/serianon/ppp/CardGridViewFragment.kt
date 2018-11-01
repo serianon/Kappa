@@ -21,16 +21,14 @@ class CardGridViewFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val cardValues = resources.getStringArray(R.array.fibonacci)
-        mCardsAdapter = CardsAdapter(activity!!, cardValues)
+        mCardsAdapter = CardsAdapter(activity!!, resources.getStringArray(R.array.fibonacci))
     }
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cardgridview, null)
 
-        val gridView = view.findViewById(R.id.gridview) as GridView
+        val gridView = view.findViewById<GridView>(R.id.gridview)
         gridView.numColumns = 3
         gridView.adapter = mCardsAdapter
 
@@ -49,13 +47,11 @@ class CardGridViewFragment : Fragment() {
 
         @SuppressLint("InflateParams")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val view: View = convertView ?: mLayoutInflater.inflate(R.layout.layout_card, null)
+            // TODO: Implement ViewHolder-pattern
+            val view: View = mLayoutInflater.inflate(R.layout.layout_card, null)
 
-            val textView = view.findViewById<TextView>(R.id.number)
-            textView.text = mCardValues[position]
-
-            val cardView = view.findViewById<CardView>(R.id.cardview)
-            cardView.setOnClickListener {
+            view.findViewById<TextView>(R.id.number).text = mCardValues[position]
+            view.findViewById<CardView>(R.id.cardview).setOnClickListener {
                 // TODO: Go to CardViewPagerFragment
             }
 

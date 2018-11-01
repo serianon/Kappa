@@ -15,7 +15,7 @@ private const val CURRENT_ITEM_INDEX_KEY = "CURRENT_ITEM_INDEX_KEY"
 private const val CARD_VALUE_KEY = "CARD_VALUE"
 
 /**
- * Showing a single card at almost fullscreen with preview of the next cards left and right.
+ * Showing a single card at almost fullscreen with previews of the next cards left and right.
  */
 class CardViewPagerFragment : Fragment() {
 
@@ -36,11 +36,9 @@ class CardViewPagerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             currentItemIndex = it.getInt(CURRENT_ITEM_INDEX_KEY)
         }
-
         mCardPagerAdapter = CardPagerAdapter(childFragmentManager)
     }
 
@@ -48,9 +46,8 @@ class CardViewPagerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cardviewpager, null)
 
-        mViewPager = view.findViewById(R.id.viewpager) as ViewPager
+        mViewPager = view.findViewById(R.id.viewpager)
         mViewPager!!.adapter = mCardPagerAdapter
-
         // Left and right card preview
         mViewPager!!.clipToPadding = false
         mViewPager!!.setPadding(100, 0, 100, 0)
@@ -82,10 +79,7 @@ class CardViewPagerFragment : Fragment() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.layout_card, container, false)
-
-            val textView = rootView.findViewById<TextView>(R.id.number)
-            textView.text = arguments!!.getString(CARD_VALUE_KEY)
-
+            rootView.findViewById<TextView>(R.id.number).text = arguments!!.getString(CARD_VALUE_KEY)
             return rootView
         }
 
