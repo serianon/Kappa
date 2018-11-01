@@ -30,14 +30,14 @@ class CardViewPagerFragment : Fragment() {
         }
     }
 
-    private var currentItemIndex: Int? = null
-    private var mCardPagerAdapter: CardPagerAdapter? = null
+    private lateinit var mCardPagerAdapter: CardPagerAdapter
+    private var mCurrentItemIndex: Int? = null
     private var mViewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            currentItemIndex = it.getInt(CURRENT_ITEM_INDEX_KEY)
+            mCurrentItemIndex = it.getInt(CURRENT_ITEM_INDEX_KEY)
         }
         mCardPagerAdapter = CardPagerAdapter(childFragmentManager)
     }
@@ -47,10 +47,11 @@ class CardViewPagerFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_cardviewpager, null)
 
         mViewPager = view.findViewById(R.id.viewpager)
-        mViewPager!!.adapter = mCardPagerAdapter
+        mViewPager?.adapter = mCardPagerAdapter
+        mViewPager?.currentItem = mCurrentItemIndex ?: 0
         // Left and right card preview
-        mViewPager!!.clipToPadding = false
-        mViewPager!!.setPadding(100, 0, 100, 0)
+        mViewPager?.clipToPadding = false
+        mViewPager?.setPadding(100, 0, 100, 0)
 
         return view
     }
@@ -79,7 +80,7 @@ class CardViewPagerFragment : Fragment() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.layout_card, container, false)
-            rootView.findViewById<TextView>(R.id.number).text = arguments!!.getString(CARD_VALUE_KEY)
+            rootView.findViewById<TextView>(R.id.number).text = arguments?.getString(CARD_VALUE_KEY)
             return rootView
         }
 

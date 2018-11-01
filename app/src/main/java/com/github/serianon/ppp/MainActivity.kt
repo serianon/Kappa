@@ -8,16 +8,22 @@ import android.view.MenuItem
 /**
  * A single-activity-approach.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CardGridViewFragment.CardGridViewFragmentListener  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.activity_toolbar))
-
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.activity_content, CardViewPagerFragment.newInstance(0))
+                .commit()
+    }
+
+    override fun onGridViewCardClicked(index: Int) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.activity_content, CardViewPagerFragment.newInstance(index))
                 .commit()
     }
 

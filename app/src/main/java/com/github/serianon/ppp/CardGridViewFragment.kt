@@ -18,6 +18,16 @@ import android.widget.TextView
 class CardGridViewFragment : Fragment() {
 
     private var mCardsAdapter: CardsAdapter? = null
+    private lateinit var mActivityCallback: CardGridViewFragmentListener
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is CardGridViewFragmentListener) {
+            mActivityCallback = context
+        } else {
+            throw ClassCastException("$context must implement ${CardGridViewFragmentListener::class}")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +45,10 @@ class CardGridViewFragment : Fragment() {
         return view
     }
 
+    interface CardGridViewFragmentListener {
+        fun onGridViewCardClicked(index: Int)
+    }
+
     inner class CardsAdapter(context: Context, private val mCardValues: Array<String>) : BaseAdapter() {
 
         private val mLayoutInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -47,13 +61,10 @@ class CardGridViewFragment : Fragment() {
 
         @SuppressLint("InflateParams")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            // TODO: Implement ViewHolder-pattern
-            val view: View = mLayoutInflater.inflate(R.layout.layout_card, null)
+            val view: View = mLayoutInflater.inflate(R.layout.layout_card, null) // TODO: Implement ViewHolder-pattern
 
             view.findViewById<TextView>(R.id.number).text = mCardValues[position]
-            view.findViewById<CardView>(R.id.cardview).setOnClickListener {
-                // TODO: Go to CardViewPagerFragment
-            }
+            view.findViewById<CardView>(R.id.cardview).setOnClickListener {mActivityCallback.onGridViewCardClicked(position)}
 
             return view
         }
