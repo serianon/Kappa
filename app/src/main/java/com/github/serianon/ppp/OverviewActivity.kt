@@ -3,8 +3,6 @@ package com.github.serianon.ppp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.CardView
 import android.support.v7.widget.Toolbar
@@ -21,7 +19,7 @@ class OverviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
         setSupportActionBar(toolbar)
 
         val gridView = findViewById<GridView>(R.id.gridview)
@@ -58,10 +56,7 @@ class OverviewActivity : AppCompatActivity() {
 
             val cardView = view.findViewById<CardView>(R.id.cardview)
             cardView.setOnClickListener {
-                val intent = CardActivity.createIntent(this@OverviewActivity, position)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@OverviewActivity, cardView, ViewCompat.getTransitionName(cardView)!!)
-                startActivity(intent, options.toBundle())
+                // TODO: Go to CardViewPagerFragment
             }
 
             return view
