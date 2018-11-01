@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 /**
- * A single-activity-approach
+ * A single-activity-approach.
  */
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
                 .beginTransaction()
-                .add(R.id.activity_content, CardViewPagerFragment.newInstance(0))
+                .replace(R.id.activity_content, CardViewPagerFragment.newInstance(0))
                 .commit()
     }
 
@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.to_overview -> {
-                // TODO: Go to overview-fragment
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.activity_content, CardGridViewFragment())
+                        .commit()
             }
         }
         return super.onOptionsItemSelected(item)
