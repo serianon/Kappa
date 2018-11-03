@@ -17,12 +17,12 @@ private const val CARD_VALUE_KEY = "CARD_VALUE"
 /**
  * Showing a single card at almost fullscreen with previews of the next cards left and right.
  */
-class CardViewPagerFragment : Fragment() {
+class ViewPagerFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(currentItemIndex: Int): CardViewPagerFragment {
-            return CardViewPagerFragment().apply {
+        fun newInstance(currentItemIndex: Int): ViewPagerFragment {
+            return ViewPagerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(CURRENT_ITEM_INDEX_KEY, currentItemIndex)
                 }
@@ -44,7 +44,7 @@ class CardViewPagerFragment : Fragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_cardviewpager, null)
+        val view = inflater.inflate(R.layout.fragment_viewpager, null)
 
         mViewPager = view.findViewById(R.id.viewpager)
         mViewPager?.adapter = mCardPagerAdapter
@@ -52,6 +52,10 @@ class CardViewPagerFragment : Fragment() {
         // Left and right card preview
         mViewPager?.clipToPadding = false
         mViewPager?.setPadding(100, 0, 100, 0)
+
+        if (savedInstanceState == null) {
+            postponeEnterTransition()
+        }
 
         return view
     }
@@ -79,9 +83,9 @@ class CardViewPagerFragment : Fragment() {
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.layout_card, container, false)
-            rootView.findViewById<TextView>(R.id.number).text = arguments?.getString(CARD_VALUE_KEY)
-            return rootView
+            val cardLayoutView = inflater.inflate(R.layout.layout_card, container, false)
+            cardLayoutView.findViewById<TextView>(R.id.card_value).text = arguments?.getString(CARD_VALUE_KEY)
+            return cardLayoutView
         }
 
     }
