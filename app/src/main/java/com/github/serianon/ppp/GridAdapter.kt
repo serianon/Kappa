@@ -1,5 +1,6 @@
 package com.github.serianon.ppp
 
+import android.support.transition.TransitionSet
 import android.support.v4.app.Fragment
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -20,13 +21,13 @@ class GridAdapter(private val mCardValues: Array<String>, private val mFragment:
                 layoutCardView,
                 object : CardViewHolderListener {
                     override fun onCardViewClicked(cardView: CardView, adapterPosition: Int) {
-                        //(mFragment.exitTransition as TransitionSet).excludeTarget(cardView, true)
+                        (mFragment.exitTransition as TransitionSet?)?.excludeTarget(cardView, true)
                         //val transitioningView: View = cardView.findViewById(R.id.cardview)
                         mFragment.fragmentManager
                                 ?.beginTransaction()
                                 //?.setReorderingAllowed(true)
                                 //?.addSharedElement(transitioningView, transitioningView.transitionName)
-                                ?.replace(R.id.activity_content, ViewPagerFragment.newInstance(adapterPosition))
+                                ?.replace(R.id.activity_content, CardPagerFragment.newInstance(adapterPosition))
                                 ?.addToBackStack(null)
                                 ?.commit()
                     }
