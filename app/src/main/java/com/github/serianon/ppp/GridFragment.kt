@@ -20,7 +20,7 @@ class GridFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
         recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.adapter = GridAdapter(resources.getStringArray(R.array.fibonacci))
+        recyclerView.adapter = GridAdapter(resources.getStringArray(R.array.fibonacci), this)
         recyclerView.setHasFixedSize(true)
 
         return view
