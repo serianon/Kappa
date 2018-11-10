@@ -22,7 +22,6 @@ class GridAdapter(private val mCardValues: Array<String>, private val mFragment:
                     override fun onCardViewClicked(cardView: CardView, adapterPosition: Int) {
                         mFragment.fragmentManager
                                 ?.beginTransaction()
-                                ?.setReorderingAllowed(true)
                                 ?.addSharedElement(cardView, cardView.transitionName)
                                 ?.replace(R.id.activity_content, CardPagerFragment.newInstance(adapterPosition))
                                 ?.addToBackStack(null)
