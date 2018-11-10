@@ -40,10 +40,11 @@ class GridAdapter(private val mCardValues: Array<String>, private val mFragment:
 
     inner class CardViewHolder(itemView: View, private val mViewHolderListener: CardViewHolderListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        private val mCardView: CardView = itemView.findViewById(R.id.cardview)
+        private val mCardView: CardView = itemView.findViewById(R.id.card_view)
         private val mNumberTextView: TextView = itemView.findViewById(R.id.card_value)
 
         fun bind(cardValue: String) {
+            mNumberTextView.textSize = 60.0f
             mNumberTextView.text = cardValue
             mCardView.transitionName = cardValue
             mCardView.setOnClickListener(this)

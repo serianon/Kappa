@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,14 +31,17 @@ class CardPagerAdapter(fragmentManager: FragmentManager, private val cardValues:
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val cardLayoutView = inflater.inflate(R.layout.layout_card, container, false)
-
-            val cardView = cardLayoutView.findViewById<TextView>(R.id.card_value)
+            val cardLayout = inflater.inflate(R.layout.layout_card, container, false)
             val cardValue = arguments?.getString(CARD_VALUE_KEY)
-            cardView.transitionName = cardValue
-            cardView.text = cardValue
 
-            return cardLayoutView
+            val cardView = cardLayout.findViewById<CardView>(R.id.card_view)
+            cardView.transitionName = cardValue
+
+            val numberTextView = cardLayout.findViewById<TextView>(R.id.card_value)
+            numberTextView.textSize = 160.0f
+            numberTextView.text = cardValue
+
+            return cardLayout
         }
 
     }
