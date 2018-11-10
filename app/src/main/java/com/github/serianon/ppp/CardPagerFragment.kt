@@ -3,7 +3,9 @@ package com.github.serianon.ppp
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,30 +47,38 @@ class CardPagerFragment : Fragment() {
         mViewPager = view.findViewById(R.id.viewpager)
         mViewPager?.adapter = mCardPagerAdapter
         mViewPager?.currentItem = mCurrentItemIndex ?: 0
+        mViewPager?.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                mCurrentItemIndex = position
+            }
+        })
         // Left and right card preview
         mViewPager?.clipToPadding = false
         mViewPager?.setPadding(100, 0, 100, 0)
 
-//        setEnterSharedElementCallback(
-//                object : SharedElementCallback() {
-//                    override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
-//                        // Locate the image view at the primary fragment (the ImageFragment that is currently
-//                        // visible). To locate the fragment, call instantiateItem with the selection position.
-//                        // At this stage, the method will simply return the fragment at the position and will
-//                        // not create a new one.
-//                        val currentFragment = mViewPager
-//                                ?.adapter
-//                                ?.instantiateItem(mViewPager, MainActivity.currentPosition) as Fragment
-//                        val view = currentFragment.view ?: return
-//
-//                        sharedElements[names[0]] = view.findViewById(R.id.image)
-//                    }
-//                })
+        prepareSharedElementTransition()
 //        if (savedInstanceState == null) {
 //            postponeEnterTransition()
 //        }
 
         return view
+    }
+
+    private fun prepareSharedElementTransition() {
+        setEnterSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+                names?.get(0)?.let { name ->
+                    findCardView()?.let { cardView ->
+                        sharedElements?.put(name, cardView)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun findCardView(): CardView? {
+        val currentFragment = mCardPagerAdapter.instantiateItem(mViewPager?.rootView!!, mCurrentItemIndex!!) as Fragment?
+        return currentFragment?.view?.findViewById(R.id.cardview)
     }
 
 }
