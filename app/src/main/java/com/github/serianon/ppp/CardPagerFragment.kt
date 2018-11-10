@@ -3,9 +3,7 @@ package com.github.serianon.ppp
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,29 +54,7 @@ class CardPagerFragment : Fragment() {
         mViewPager?.clipToPadding = false
         mViewPager?.setPadding(100, 0, 100, 0)
 
-        prepareSharedElementTransition()
-//        if (savedInstanceState == null) {
-//            postponeEnterTransition()
-//        }
-
         return view
-    }
-
-    private fun prepareSharedElementTransition() {
-        setEnterSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
-                names?.get(0)?.let { name ->
-                    findCardView()?.let { cardView ->
-                        sharedElements?.put(name, cardView)
-                    }
-                }
-            }
-        })
-    }
-
-    private fun findCardView(): CardView? {
-        val currentFragment = mCardPagerAdapter.instantiateItem(mViewPager?.rootView!!, mCurrentItemIndex!!) as Fragment?
-        return currentFragment?.view?.findViewById(R.id.cardview)
     }
 
 }
