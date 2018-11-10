@@ -31,7 +31,12 @@ class CardPagerAdapter(fragmentManager: FragmentManager, private val cardValues:
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val cardLayoutView = inflater.inflate(R.layout.layout_card, container, false)
-            cardLayoutView.findViewById<TextView>(R.id.card_value).text = arguments?.getString(CARD_VALUE_KEY)
+
+            val cardView = cardLayoutView.findViewById<TextView>(R.id.card_value)
+            val cardValue = arguments?.getString(CARD_VALUE_KEY)
+            cardView.transitionName = cardValue
+            cardView.text = cardValue
+
             return cardLayoutView
         }
 

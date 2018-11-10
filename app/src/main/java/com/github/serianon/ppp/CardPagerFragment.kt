@@ -35,6 +35,7 @@ class CardPagerFragment : Fragment() {
         arguments?.let {
             mCurrentItemIndex = it.getInt(CURRENT_ITEM_INDEX_KEY)
         }
+        postponeEnterTransition()
         mCardPagerAdapter = CardPagerAdapter(childFragmentManager, resources.getStringArray(R.array.fibonacci))
     }
 
@@ -55,6 +56,11 @@ class CardPagerFragment : Fragment() {
         mViewPager?.setPadding(100, 0, 100, 0)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        startPostponedEnterTransition()
     }
 
 }
