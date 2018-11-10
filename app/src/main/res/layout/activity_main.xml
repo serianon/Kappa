@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/dark_bg"
+    android:background="@color/light_bg"
     tools:context="com.github.serianon.ppp.MainActivity">
 
     <android.support.design.widget.AppBarLayout

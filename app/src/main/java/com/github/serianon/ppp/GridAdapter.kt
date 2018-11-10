@@ -44,7 +44,7 @@ class GridAdapter(private val mCardValues: Array<String>, private val mFragment:
         private val mNumberTextView: TextView = itemView.findViewById(R.id.card_value)
 
         fun bind(cardValue: String) {
-            mNumberTextView.textSize = 60.0f
+            mNumberTextView.textSize = 50.0f
             mNumberTextView.text = cardValue
             mCardView.transitionName = cardValue
             mCardView.setOnClickListener(this)
