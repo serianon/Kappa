@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class CardViewHolder(itemView: View, private val mOnClickListener: CardViewHolderListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+class GridCardViewHolder(itemView: View, private val mOnClickListener: CardViewHolderListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     interface CardViewHolderListener {
         fun onCardViewClicked(cardView: CardView, adapterPosition: Int)
