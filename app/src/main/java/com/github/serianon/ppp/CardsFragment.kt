@@ -16,39 +16,39 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class CardsFragment : Fragment() {
 
-    private val mVerticalGridLayout = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
+    private val mGridLayout = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
 
-    private val mHorizontalLinearLayout = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    private val mPageLayout = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_cards, null)
 
         view.findViewById<RecyclerView>(R.id.recyclerview).run {
-            layoutManager = mVerticalGridLayout
             adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this@CardsFragment)
             setHasFixedSize(true)
         }
+        useGridLayout()
 
         return view
     }
 
-    fun switchLayout() = if (isVerticalGridLayout()) useHorizontalLinearLayout() else useVerticalGridLayout()
+    fun switchLayout() = if (isGridLayout()) usePageLayout() else useGridLayout()
 
     fun scrollTo(position: Int) = findRecyclerView()?.layoutManager?.scrollToPosition(position)
 
-    private fun isVerticalGridLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is GridLayoutManager }
+    private fun isGridLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is GridLayoutManager }
 
-    private fun isHorizontalLinearLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
+    private fun isPageLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
 
-    private fun useHorizontalLinearLayout() = findRecyclerView()?.run {
-        layoutManager = mHorizontalLinearLayout
-        LinearSnapHelper().attachToRecyclerView(this)
+    private fun useGridLayout() = findRecyclerView()?.run {
+        layoutManager = mGridLayout
+        onFlingListener = null
     }
 
-    private fun useVerticalGridLayout() = findRecyclerView()?.run {
-        layoutManager = mVerticalGridLayout
-        onFlingListener = null
+    private fun usePageLayout() = findRecyclerView()?.run {
+        layoutManager = mPageLayout
+        LinearSnapHelper().attachToRecyclerView(this)
     }
 
     private fun findRecyclerView() = view?.findViewById<RecyclerView>(R.id.recyclerview)
