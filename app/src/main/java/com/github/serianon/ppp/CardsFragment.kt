@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Showing all cards in an overview for fast-access.
+ * Showing all cards.
  */
-class GridFragment : Fragment() {
+class CardsFragment : Fragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,7 +20,7 @@ class GridFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
         recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.adapter = GridAdapter(resources.getStringArray(R.array.fibonacci), this)
+        recyclerView.adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this)
         recyclerView.setHasFixedSize(true)
 
         return view

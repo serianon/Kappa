@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class GridAdapter(private val mCardValues: Array<String>, private val mFragment: Fragment) : RecyclerView.Adapter<GridAdapter.CardViewHolder>() {
+class CardsAdapter(private val mCardValues: Array<String>, private val mFragment: Fragment) : RecyclerView.Adapter<CardsAdapter.CardViewHolder>() {
 
     interface CardViewHolderListener {
         fun onCardViewClicked(cardView: CardView, adapterPosition: Int)

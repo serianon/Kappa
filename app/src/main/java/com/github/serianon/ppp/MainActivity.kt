@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.activity_content, GridFragment())
+                .replace(R.id.activity_content, CardsFragment())
                 .commit()
     }
 
