@@ -11,7 +11,7 @@ class PageCardViewHolder(itemView: View, private val mOnClickListener: CardViewH
     private val mNumberTextView: TextView = itemView.findViewById(R.id.page_card_value)
 
     override fun bind(cardValue: String) {
-        mNumberTextView.textSize = 100.0f
+        mNumberTextView.textSize = 150.0f
         mNumberTextView.text = cardValue
         mCardView.setOnClickListener(this)
     }
