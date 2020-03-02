@@ -12,6 +12,7 @@ import android.widget.TextView
 
 private const val CARD_VALUE_KEY = "CARD_VALUE"
 
+@Deprecated("Nobody likes VierPager")
 class CardPagerAdapter(fragmentManager: FragmentManager, private val cardValues: Array<String>) : FragmentPagerAdapter(fragmentManager) {
 
     override fun getItem(position: Int): Fragment = CardFragment.newInstance(cardValues[position])

@@ -13,6 +13,7 @@ private const val CURRENT_ITEM_INDEX_KEY = "CURRENT_ITEM_INDEX_KEY"
 /**
  * Showing a single card at almost fullscreen with previews of the next cards left and right.
  */
+@Deprecated("Nobody likes VierPager")
 class CardPagerFragment : Fragment() {
 
     companion object {
