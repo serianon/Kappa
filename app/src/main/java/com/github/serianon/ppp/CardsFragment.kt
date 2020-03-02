@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * Showing all cards.
  */
 class CardsFragment : Fragment() {
 
-    private val mVerticalGridLayout = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+    private val mVerticalGridLayout = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
 
     private val mHorizontalLinearLayout = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -31,4 +31,18 @@ class CardsFragment : Fragment() {
 
         return view
     }
+
+    fun switchLayout() = if (isVerticalGridLayout()) useHorizontalLinearLayout() else useVerticalGridLayout()
+
+    fun scrollTo(position: Int) = findRecyclerView()?.layoutManager?.scrollToPosition(position)
+
+    private fun isVerticalGridLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is GridLayoutManager }
+
+    private fun isHorizontalLinearLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
+
+    private fun useHorizontalLinearLayout() = findRecyclerView()?.run { layoutManager = mHorizontalLinearLayout }
+
+    private fun useVerticalGridLayout() = findRecyclerView()?.run { layoutManager = mVerticalGridLayout }
+
+    private fun findRecyclerView() = view?.findViewById<RecyclerView>(R.id.recyclerview)
 }

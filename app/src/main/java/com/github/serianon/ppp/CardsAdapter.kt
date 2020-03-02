@@ -1,58 +1,23 @@
 package com.github.serianon.ppp
 
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 
-class CardsAdapter(private val mCardValues: Array<String>, private val mFragment: Fragment) : RecyclerView.Adapter<CardsAdapter.CardViewHolder>() {
+class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFragment: CardsFragment) : RecyclerView.Adapter<CardViewHolder>() {
 
-    interface CardViewHolderListener {
-        fun onCardViewClicked(cardView: CardView, adapterPosition: Int)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CardViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.layout_card, parent, false),
+        object : CardViewHolder.CardViewHolderListener {
+            override fun onCardViewClicked(cardView: CardView, adapterPosition: Int): Unit = mCardsFragment.run {
+                switchLayout()
+                scrollTo(adapterPosition)
+            }
+        }
+    )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val layoutCardView = LayoutInflater.from(parent.context).inflate(R.layout.layout_card, parent, false)
-        return CardViewHolder(
-                layoutCardView,
-                object : CardViewHolderListener {
-                    override fun onCardViewClicked(cardView: CardView, adapterPosition: Int) {
-                        mFragment.fragmentManager
-                                ?.beginTransaction()
-                                ?.addSharedElement(cardView, cardView.transitionName)
-                                ?.replace(R.id.activity_content, CardPagerFragment.newInstance(adapterPosition))
-                                ?.addToBackStack(null)
-                                ?.commit()
-                    }
-                }
-        )
-    }
-
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.bind(mCardValues[position])
-    }
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) = holder.bind(mCardValues[position])
 
     override fun getItemCount(): Int = mCardValues.size
-
-    inner class CardViewHolder(itemView: View, private val mViewHolderListener: CardViewHolderListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
-        private val mCardView: CardView = itemView.findViewById(R.id.card_view)
-        private val mNumberTextView: TextView = itemView.findViewById(R.id.card_value)
-
-        fun bind(cardValue: String) {
-            mNumberTextView.textSize = 50.0f
-            mNumberTextView.text = cardValue
-            mCardView.transitionName = cardValue
-            mCardView.setOnClickListener(this)
-        }
-
-        override fun onClick(view: View?) {
-            mViewHolderListener.onCardViewClicked(view as CardView, adapterPosition)
-        }
-
-    }
-
 }
