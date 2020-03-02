@@ -2,28 +2,33 @@ package com.github.serianon.ppp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * Showing all cards.
  */
 class CardsFragment : Fragment() {
 
-    @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_grid, null)
+    private val mVerticalGridLayout = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this)
-        recyclerView.setHasFixedSize(true)
+    private val mHorizontalLinearLayout = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+    @SuppressLint("InflateParams")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.fragment_cards, null)
+
+        view.findViewById<RecyclerView>(R.id.recyclerview).run {
+            layoutManager = mVerticalGridLayout
+            adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this@CardsFragment)
+            setHasFixedSize(true)
+        }
 
         return view
     }
-
 }
