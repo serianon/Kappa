@@ -6,9 +6,9 @@ import androidx.cardview.widget.CardView
 
 class GridCardViewHolder(itemView: View, private val mOnClickListener: CardViewHolderListener) : AbstractCardViewHolder(itemView, mOnClickListener) {
 
-    private val mCardView: CardView = itemView.findViewById(R.id.card_view)
+    private val mCardView: CardView = itemView.findViewById(R.id.grid_card_view)
 
-    private val mNumberTextView: TextView = itemView.findViewById(R.id.card_value)
+    private val mNumberTextView: TextView = itemView.findViewById(R.id.grid_card_value)
 
     override fun bind(cardValue: String) {
         mNumberTextView.textSize = 50.0f
