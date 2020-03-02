@@ -25,10 +25,11 @@ class CardsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_cards, null)
 
         view.findViewById<RecyclerView>(R.id.recyclerview).run {
+            //layoutManager = mGridLayout
+            layoutManager = mPageLayout
             adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this@CardsFragment)
             setHasFixedSize(true)
         }
-        useGridLayout()
 
         return view
     }
@@ -37,18 +38,20 @@ class CardsFragment : Fragment() {
 
     fun scrollTo(position: Int) = findRecyclerView()?.layoutManager?.scrollToPosition(position)
 
-    private fun isGridLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is GridLayoutManager }
+    fun isGridLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is GridLayoutManager }
 
-    private fun isPageLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
+    fun isPageLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
 
     private fun useGridLayout() = findRecyclerView()?.run {
         layoutManager = mGridLayout
         onFlingListener = null
+        adapter?.notifyDataSetChanged()
     }
 
     private fun usePageLayout() = findRecyclerView()?.run {
         layoutManager = mPageLayout
         LinearSnapHelper().attachToRecyclerView(this)
+        adapter?.notifyDataSetChanged()
     }
 
     private fun findRecyclerView() = view?.findViewById<RecyclerView>(R.id.recyclerview)
