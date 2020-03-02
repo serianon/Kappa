@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -40,9 +41,15 @@ class CardsFragment : Fragment() {
 
     private fun isHorizontalLinearLayout() = findRecyclerView().let { if (it == null) false else it.layoutManager is LinearLayoutManager }
 
-    private fun useHorizontalLinearLayout() = findRecyclerView()?.run { layoutManager = mHorizontalLinearLayout }
+    private fun useHorizontalLinearLayout() = findRecyclerView()?.run {
+        layoutManager = mHorizontalLinearLayout
+        LinearSnapHelper().attachToRecyclerView(this)
+    }
 
-    private fun useVerticalGridLayout() = findRecyclerView()?.run { layoutManager = mVerticalGridLayout }
+    private fun useVerticalGridLayout() = findRecyclerView()?.run {
+        layoutManager = mVerticalGridLayout
+        onFlingListener = null
+    }
 
     private fun findRecyclerView() = view?.findViewById<RecyclerView>(R.id.recyclerview)
 }
