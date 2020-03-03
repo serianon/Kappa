@@ -33,6 +33,7 @@ class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFra
         override fun onCardViewClicked(cardView: CardView, adapterPosition: Int): Unit = mCardsFragment.run {
             switchLayout()
             scrollTo(adapterPosition)
+            notifyItemRangeChanged(0, itemCount)
         }
     }
 }

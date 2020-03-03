@@ -44,13 +44,11 @@ class CardsFragment : Fragment() {
     private fun useGridLayout() = findRecyclerView()?.run {
         layoutManager = mGridLayout
         onFlingListener = null
-        adapter?.notifyDataSetChanged()
     }
 
     private fun usePageLayout() = findRecyclerView()?.run {
         layoutManager = mPageLayout
         LinearSnapHelper().attachToRecyclerView(this)
-        adapter?.notifyDataSetChanged()
     }
 
     private fun findRecyclerView() = view?.findViewById<RecyclerView>(R.id.recyclerview)
