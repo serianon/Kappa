@@ -1,4 +1,4 @@
-package com.github.serianon.ppp
+package com.github.serianon.kappa
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

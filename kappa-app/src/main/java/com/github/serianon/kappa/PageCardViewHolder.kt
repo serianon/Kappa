@@ -1,4 +1,4 @@
-package com.github.serianon.ppp
+package com.github.serianon.kappa
 
 import android.view.View
 import android.widget.TextView

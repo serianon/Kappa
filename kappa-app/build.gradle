@@ -16,7 +16,7 @@ def buildVersionName() {
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.github.serianon.ppp"
+        applicationId "com.github.serianon.kappa"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode buildVersionCode()
