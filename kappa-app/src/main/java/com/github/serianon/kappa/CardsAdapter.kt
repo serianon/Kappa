@@ -12,14 +12,8 @@ class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFra
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
-        ViewType.GRID.ordinal -> GridCardViewHolder(
-            LayoutInflater.from(parent.context).inflate(GridCardViewHolder.LAYOUT_RES, parent, false),
-            createSwitchLayoutListener()
-        )
-        ViewType.PAGE.ordinal -> PageCardViewHolder(
-            LayoutInflater.from(parent.context).inflate(PageCardViewHolder.LAYOUT_RES, parent, false),
-            createSwitchLayoutListener()
-        )
+        ViewType.GRID.ordinal -> GridCardViewHolder(inflateView(parent, GridCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
+        ViewType.PAGE.ordinal -> PageCardViewHolder(inflateView(parent, PageCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
         else -> throw IllegalStateException("Unknown RecyclerView-Layout-State")
     }
 
@@ -32,6 +26,8 @@ class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFra
     }
 
     override fun getItemCount(): Int = mCardValues.size
+
+    private fun inflateView(parent: ViewGroup, layoutRes: Int) = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
 
     private fun createSwitchLayoutListener() = object : AbstractCardViewHolder.CardViewHolderListener {
         override fun onCardViewClicked(cardView: CardView, adapterPosition: Int): Unit = mCardsFragment.run {
