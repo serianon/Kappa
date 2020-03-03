@@ -25,8 +25,7 @@ class CardsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_cards, null)
 
         view.findViewById<RecyclerView>(R.id.recyclerview).run {
-            //layoutManager = mGridLayout
-            layoutManager = mPageLayout
+            layoutManager = mGridLayout
             adapter = CardsAdapter(resources.getStringArray(R.array.fibonacci), this@CardsFragment)
             setHasFixedSize(true)
         }

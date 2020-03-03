@@ -4,6 +4,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 
+/**
+ * A card displayed in a grid of many cards.
+ */
 class GridCardViewHolder(itemView: View, private val mOnClickListener: CardViewHolderListener) : AbstractCardViewHolder(itemView, mOnClickListener) {
 
     private val mCardView: CardView = itemView.findViewById(R.id.grid_card_view)
