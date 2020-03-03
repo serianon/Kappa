@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.github.serianon.kappa.CardsAdapter.ViewType.GRID
+import com.github.serianon.kappa.CardsAdapter.ViewType.PAGE
 
 class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFragment: CardsFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -11,21 +13,21 @@ class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFra
         GRID, PAGE
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
-        ViewType.GRID.ordinal -> GridCardViewHolder(inflateView(parent, GridCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
-        ViewType.PAGE.ordinal -> PageCardViewHolder(inflateView(parent, PageCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
+        GRID.ordinal -> GridCardViewHolder(inflateView(parent, GridCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
+        PAGE.ordinal -> PageCardViewHolder(inflateView(parent, PageCardViewHolder.LAYOUT_RES), createSwitchLayoutListener())
         else -> throw IllegalStateException("Unknown RecyclerView-Layout-State")
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as AbstractCardViewHolder).bind(mCardValues[position])
 
     override fun getItemViewType(position: Int) = when {
-        mCardsFragment.isGridLayout() -> ViewType.GRID.ordinal
-        mCardsFragment.isPageLayout() -> ViewType.PAGE.ordinal
+        mCardsFragment.isGridLayout() -> GRID.ordinal
+        mCardsFragment.isPageLayout() -> PAGE.ordinal
         else -> -1
     }
 
-    override fun getItemCount(): Int = mCardValues.size
+    override fun getItemCount() = mCardValues.size
 
     private fun inflateView(parent: ViewGroup, layoutRes: Int) = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
 
