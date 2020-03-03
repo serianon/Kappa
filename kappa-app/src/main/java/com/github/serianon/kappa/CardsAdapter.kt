@@ -5,21 +5,31 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFragment: CardsFragment) : RecyclerView.Adapter<AbstractCardViewHolder>() {
+class CardsAdapter(private val mCardValues: Array<String>, private val mCardsFragment: CardsFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbstractCardViewHolder = when {
-        mCardsFragment.isGridLayout() -> GridCardViewHolder(
+    enum class ViewType {
+        GRID, PAGE
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
+        ViewType.GRID.ordinal -> GridCardViewHolder(
             LayoutInflater.from(parent.context).inflate(GridCardViewHolder.LAYOUT_RES, parent, false),
             createSwitchLayoutListener()
         )
-        mCardsFragment.isPageLayout() -> PageCardViewHolder(
+        ViewType.PAGE.ordinal -> PageCardViewHolder(
             LayoutInflater.from(parent.context).inflate(PageCardViewHolder.LAYOUT_RES, parent, false),
             createSwitchLayoutListener()
         )
         else -> throw IllegalStateException("Unknown RecyclerView-Layout-State")
     }
 
-    override fun onBindViewHolder(holder: AbstractCardViewHolder, position: Int) = holder.bind(mCardValues[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as AbstractCardViewHolder).bind(mCardValues[position])
+
+    override fun getItemViewType(position: Int) = when {
+        mCardsFragment.isGridLayout() -> ViewType.GRID.ordinal
+        mCardsFragment.isPageLayout() -> ViewType.PAGE.ordinal
+        else -> -1
+    }
 
     override fun getItemCount(): Int = mCardValues.size
 
