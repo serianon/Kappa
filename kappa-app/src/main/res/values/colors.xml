@@ -10,6 +10,7 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="pokercard_text">#333</color>
     <color name="dark_bg">#4d4d4d</color>
     <color name="light_bg">#dddddd</color>
 </resources>
